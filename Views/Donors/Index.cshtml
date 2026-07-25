@@ -1,0 +1,35 @@
+@model IEnumerable<blood.Models.Donor>
+@{
+    ViewData["Title"] = "Donors";
+}
+<h1>Donors</h1>
+<p><a href="/Donors/Create">Create New</a></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>FullName</th>
+            <th>BloodGroup</th>
+            <th>ContactNo</th>
+            <th>City</th>
+            <th>LastDonationDate</th>
+            <th>Total Volume (mL)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>@item.FullName</td>
+            <td>@item.BloodGroup</td>
+            <td>@item.ContactNo</td>
+            <td>@item.City</td>
+            <td>@item.LastDonationDate</td>
+            <td>@item.Donations.Sum(d => d.VolumeMl)</td>
+            <td>
+                <a href="/Donors/Edit/@item.DonorId">Edit / Manage Donations</a> |
+                <a href="/Donors/Delete/@item.DonorId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

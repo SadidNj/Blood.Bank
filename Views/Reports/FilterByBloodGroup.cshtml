@@ -1,0 +1,28 @@
+@model IEnumerable<blood.Models.Donor>
+@{
+    ViewData["Title"] = "Filter by Blood Group";
+}
+<h1>Filter by Blood Group</h1>
+<form action="/Reports/FilterByBloodGroup" method="get">
+    <label>Blood Group:</label>
+    <input type="text" name="bloodGroup" value="@ViewBag.BloodGroup" />
+    <input type="submit" value="Filter" />
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>FullName</th>
+            <th>BloodGroup</th>
+            <th>LastDonationDate</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach(var item in Model) {
+        <tr>
+            <td>@item.FullName</td>
+            <td>@item.BloodGroup</td>
+            <td>@item.LastDonationDate</td>
+        </tr>
+}
+    </tbody>
+</table>

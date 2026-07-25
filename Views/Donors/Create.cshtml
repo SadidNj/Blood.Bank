@@ -1,0 +1,69 @@
+@model blood.Models.Donor
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+<h4>Donor</h4>
+<hr />
+@{
+    if(!ViewData.ModelState.IsValid)
+    {
+        <div style="color:red">
+            @Html.ValidationSummary(false)
+        </div>
+    }
+}
+<form action="/Donors/Create" method="post">
+    <div>
+        <label>FullName</label>
+        <input type="text" name="FullName" value="@Model?.FullName" required pattern="^[a-zA-Z\s]+$" title="Name must contain only letters and spaces" />
+    </div>
+    <div>
+        <label>BloodGroup</label>
+        <select name="BloodGroup" required>
+            <option value="">Select Blood Group</option>
+            <option value="A+" selected="@(Model?.BloodGroup == "A+")">A+</option>
+            <option value="A-" selected="@(Model?.BloodGroup == "A-")">A-</option>
+            <option value="B+" selected="@(Model?.BloodGroup == "B+")">B+</option>
+            <option value="B-" selected="@(Model?.BloodGroup == "B-")">B-</option>
+            <option value="AB+" selected="@(Model?.BloodGroup == "AB+")">AB+</option>
+            <option value="AB-" selected="@(Model?.BloodGroup == "AB-")">AB-</option>
+            <option value="O+" selected="@(Model?.BloodGroup == "O+")">O+</option>
+            <option value="O-" selected="@(Model?.BloodGroup == "O-")">O-</option>
+        </select>
+    </div>
+    <div>
+        <label>ContactNo</label>
+        <input type="text" name="ContactNo" value="@Model?.ContactNo" required pattern="^\d+$" title="Contact number must contain only numbers" />
+    </div>
+    <div>
+        <label>City</label>
+        <input type="text" name="City" value="@Model?.City" required pattern="^[a-zA-Z\s]+$" title="City must contain only letters and spaces" />
+    </div>
+    <div>
+        <label>LastDonationDate (yyyy-MM-dd)</label>
+        <input type="date" name="LastDonationDate" value="@Model?.LastDonationDate?.ToString("yyyy-MM-dd")" class="form-control" required />
+    </div>
+    
+    <hr />
+    <h4>Initial Donation</h4>
+    <div>
+        <label>Volume (mL)</label>
+        <input type="number" name="VolumeMl" class="form-control" required min="1" title="Volume must be a positive number" />
+    </div>
+    <div>
+        <label>Camp Name</label>
+        <input type="text" name="CampName" class="form-control" required pattern="^[a-zA-Z\s]+$" title="Camp name must contain only letters and spaces" />
+    </div>
+    <div>
+        <label>Donation Date</label>
+        <input type="date" name="DonationDate" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+    </div>
+
+    <div class="mt-3">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+<div>
+    <a href="/Donors">Back to List</a>
+</div>

@@ -1,0 +1,23 @@
+@model IEnumerable<blood.Models.Donor>
+@{
+    ViewData["Title"] = "Donors Sorted By Date";
+}
+<h1>Donors Sorted By Last Donation Date (Recent First)</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>FullName</th>
+            <th>BloodGroup</th>
+            <th>LastDonationDate</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach(var item in Model) {
+        <tr>
+            <td>@item.FullName</td>
+            <td>@item.BloodGroup</td>
+            <td>@item.LastDonationDate</td>
+        </tr>
+}
+    </tbody>
+</table>
